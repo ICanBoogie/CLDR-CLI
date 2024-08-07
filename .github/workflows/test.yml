@@ -1,0 +1,49 @@
+name: test
+
+on:
+- push
+- pull_request
+
+jobs:
+  phpunit:
+    name: phpunit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+        - "8.1"
+        - "8.2"
+        - "8.3"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "${{ matrix.php-version }}"
+        ini-values: memory_limit=-1
+        tools: composer:v2
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.composer/cache
+          vendor
+        key: "php-${{ matrix.php-version }}"
+        restore-keys: "php-${{ matrix.php-version }}"
+    - name: Cache CLDR
+      uses: actions/cache@v4
+      with:
+        path: |
+          .cldr-cache
+        key: "cldr"
+        restore-keys: "cldr"
+
+    - name: Install dependencies
+      run: make vendor
+
+    - name: Warm up
+      run: make warm-up
+
+    - name: Run PHPUnit
+      run: make test

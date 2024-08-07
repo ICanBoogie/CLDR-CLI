@@ -1,0 +1,49 @@
+{
+  "name": "icanboogie/cldr-cli",
+  "type": "library",
+  "description": "A CLI for ICanBoogie/CLDR",
+  "keywords": [
+  ],
+  "homepage": "https://icanboogie.org/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Olivier Laviale",
+      "email": "olivier.laviale@gmail.com",
+      "homepage": "https://olvlvl.com/",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/ICanBoogie/CLDR-CLI/issues",
+    "source": "https://github.com/ICanBoogie/CLDR-CLI"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=8.1",
+    "icanboogie/cldr": "^6.0",
+    "symfony/console": "^6.3|^7.0",
+    "symfony/dependency-injection": "^6.3|^7.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.11",
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "ICanBoogie\\CLDR\\CLI\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\ICanBoogie\\CLDR\\": "vendor/icanboogie/cldr/tests"
+    }
+  },
+  "bin": [
+    "cldr"
+  ]
+}
